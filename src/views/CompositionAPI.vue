@@ -25,49 +25,42 @@
 
 <script>
 import { ref, computed, reactive, toRefs } from "vue";
+
+//* composite
+import useEventSpace from "@/composables/use/eventSpace";
+
 export default {
   setup() {
-    //* data reactive
-    // const capacity = ref(4);
-    // const attending = ref(["Buudi", "Alex", "Suep"]);
-
-    // //* computed
-    // const spacesLeft = computed(() => {
-    //   return capacity.value - attending.value.length;
+    // //* Data and computed with object reactive and toRefs
+    // //* Care with duplicate name ref and reactive object
+    // const event = reactive({
+    //   capacity: 10,
+    //   attending: ["Buudi", "Alex", "Suep"],
+    //   spacesLeft: computed(() => {
+    //     return event.capacity - event.attending.length;
+    //   }),
     // });
-
     // //* methods
     // function increaseCapacityWithSetupMethods() {
     //   alert("plus with setup methods");
-    //   capacity.value += 1;
+    //   event.capacity += 1;
     // }
-
-    // //* returns
     // return {
-    //   capacity,
-    //   attending,
-    //   spacesLeft,
+    //   ...toRefs(event),
     //   increaseCapacityWithSetupMethods,
     // };
 
-    //* Data and computed with object reactive and toRefs
-    //* Care with duplicate name ref and reactive object
-    const event = reactive({
-      capacity: 10,
-      attending: ["Buudi", "Alex", "Suep"],
-      spacesLeft: computed(() => {
-        return event.capacity - event.attending.length;
-      }),
-    });
-
-    //* methods
-    function increaseCapacityWithSetupMethods() {
-      alert("plus with setup methods");
-      event.capacity += 1;
-    }
+    const {
+      capacity,
+      attending,
+      spacesLeft,
+      increaseCapacityWithSetupMethods,
+    } = useEventSpace();
 
     return {
-      ...toRefs(event),
+      capacity,
+      attending,
+      spacesLeft,
       increaseCapacityWithSetupMethods,
     };
   },
