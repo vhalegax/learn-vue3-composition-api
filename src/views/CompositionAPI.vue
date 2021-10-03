@@ -27,6 +27,7 @@
 import { ref, computed, reactive, toRefs } from "vue";
 
 //* composite
+import compositeLifecycle from "@/composables/compositeLifecycle";
 import useEventSpace from "@/composables/use/eventSpace";
 
 export default {
@@ -49,6 +50,8 @@ export default {
     //   ...toRefs(event),
     //   increaseCapacityWithSetupMethods,
     // };
+
+    compositeLifecycle();
 
     const {
       capacity,
