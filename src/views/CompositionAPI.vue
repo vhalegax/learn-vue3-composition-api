@@ -6,7 +6,7 @@
 
     <br />
     <br />
-    <button @click="increaseCapacityWithSetupMetdhods()">
+    <button @click="increaseCapacityWithSetupMethods()">
       Increase Capacity With setup Methods
     </button>
     <button @click="increaseCapacityWithNormalMethods()">
@@ -24,28 +24,51 @@
 </template>
 
 <script>
-import { ref, computed } from "vue";
+import { ref, computed, reactive, toRefs } from "vue";
 export default {
   setup() {
-    const capacity = ref(4);
-    const attending = ref(["Buudi", "Alex", "Suep"]);
+    //* data reactive
+    // const capacity = ref(4);
+    // const attending = ref(["Buudi", "Alex", "Suep"]);
 
-    // computed
-    const spacesLeft = computed(() => {
-      return capacity.value - attending.value.length;
+    // //* computed
+    // const spacesLeft = computed(() => {
+    //   return capacity.value - attending.value.length;
+    // });
+
+    // //* methods
+    // function increaseCapacityWithSetupMethods() {
+    //   alert("plus with setup methods");
+    //   capacity.value += 1;
+    // }
+
+    // //* returns
+    // return {
+    //   capacity,
+    //   attending,
+    //   spacesLeft,
+    //   increaseCapacityWithSetupMethods,
+    // };
+
+    //* Data and computed with object reactive and toRefs
+    //* Care with duplicate name ref and reactive object
+    const event = reactive({
+      capacity: 10,
+      attending: ["Buudi", "Alex", "Suep"],
+      spacesLeft: computed(() => {
+        return event.capacity - event.attending.length;
+      }),
     });
 
-    // methods
-    function increaseCapacityWithSetupMetdhods() {
+    //* methods
+    function increaseCapacityWithSetupMethods() {
       alert("plus with setup methods");
-      capacity.value += 1;
+      event.capacity += 1;
     }
 
     return {
-      capacity,
-      attending,
-      spacesLeft,
-      increaseCapacityWithSetupMetdhods,
+      ...toRefs(event),
+      increaseCapacityWithSetupMethods,
     };
   },
 
