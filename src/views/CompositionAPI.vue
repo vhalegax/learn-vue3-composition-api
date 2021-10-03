@@ -10,6 +10,8 @@
       Increase Capacity With normal Methods
     </button>
 
+    <button @click="showHelloWord()">Show Hello World</button>
+
     <hr />
     <h2>Capacity : {{ capacity }}</h2>
     <h2>Spaces Lefts: {{ spacesLeft }} out of {{ capacity }}</h2>
@@ -82,6 +84,10 @@ export default {
     increaseCapacityWithNormalMethods() {
       console.log("plus with normal methods");
       this.capacity += 1;
+    },
+
+    showHelloWord() {
+      Swal.fire("Hello world!");
     },
   },
 };
